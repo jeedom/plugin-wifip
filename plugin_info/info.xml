@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+    <id>wifip</id>
+    <name>Wifip</name>
+    <description>Plugin pour gérer le wifi de votre box ainsi que fixer l'ip</description>
+    <icon>icon maison-house112</icon>
+    <licence>AGPL</licence>
+    <author>Ludovic SARAKHA</author>
+    <installation>Aucune</installation>
+    <require>2.0</require>
+    <version>1.0</version>
+    <category>communication</category>
+</info>
+

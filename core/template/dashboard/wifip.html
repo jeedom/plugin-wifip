@@ -1,0 +1,77 @@
+<div class="eqLogic-widget eqLogic" style="width: 280px;background-color: #background_color#;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="dashboard" >
+  <style  type="text/css">
+  .btn-circle {
+  width: 20px;
+  height: 20px;
+  line-height: 20px; /* adjust line height to align vertically*/
+  padding:0;
+  border-radius: 50%;
+}
+</style>
+  <span class="statusCmd" style="position: absolute;margin-left: 3px;width : 30px;z-index: 1030;"></span>
+  <i class='fa fa-refresh pull-right cursor cmd refresh tooltips' data-cmd_id="#refresh_id#" title="Rafraîchir" style="margin-top: 3px;margin-right: 3px;"></i>
+  <i class="fa fa-retweet cursor tooltips changecmd noRefresh" title="Changer informations" style="position : absolute;bottom: 3px;left: 3px;z-index: 1030;"></i>  <div class="relais1_state_#uid#"><i style="position : absolute;bottom: 3px;left: 25px;cursor:default;font-size: 1em;color:grey" class="icon jeedom-prise relais1 tooltips" title="Relais 1"></i></div><div class="relais2_state_#uid#">  <i style="position : absolute;bottom: 3px;left: 40px;cursor:default;font-size: 1em;color:grey" class="icon jeedom-prise relais2 tooltips" title="Relais 2"></i></div>
+  <center><a href="#eqLink#" style="font-size : 1.2em;"> #name# </a></center>
+<div class="row" style="margin-left : 2px;margin-right : 2px;">
+   <div class="col-sm-6 colorpage" style="padding-right : 5px;padding-left : 5px;White-space:nowrap; Overflow:hidden;">
+     <span class="colorcontrol" style="color:white;margin-bottom : 0px;font-size : 10px;font-weight: bold;Cursor:default"><i class="fa fa-paint-brush"></i> Diode</span>
+	 <span class="relaiscontrol" style="color:white;margin-bottom : 0px;font-size : 10px;font-weight: bold;Cursor:default;display : none;"><i class="icon techno-fleches"></i> Relais</span>
+     <div class="center_#uid# colorcontrol">
+		<center><span class="diode tooltips" data-cmd_id="#colorinfo_id#" title="Couleur de la diode (#colorinfo#)" style="cursor : default;font-size : 30px"><i class="fa fa-circle fa-lg" style="color : #colorcode#;"></i></span></center>
+     </div>
+     <div class="center_#uid# colorcontrol">
+        <a class="cmd cmd-widget cursor tooltips" data-cmd_id="#redcolor_id#" title="Rouge" style="margin-left : 30px;"><i class="fa fa-circle fa-lg" style="color : #FF0000;"></i></a>
+		<a class="cmd cmd-widget cursor tooltips" data-cmd_id="#greencolor_id#" title="Vert"><i class="fa fa-circle fa-lg" style="color : #008000;"></i></a>
+		<a class="cmd cmd-widget cursor tooltips" data-cmd_id="#bluecolor_id#" title="Bleu"><i class="fa fa-circle fa-lg" style="color : #0000FF;"></i></a>
+		<a class="cmd cmd-widget cursor tooltips" data-cmd_id="#yellowcolor_id#" title="Jaune"><i class="fa fa-circle fa-lg" style="color : #FFFF00;"></i></a></br>
+		<a class="cmd cmd-widget cursor tooltips" data-cmd_id="#pinkcolor_id#" title="Rose" style="margin-left : 30px;"><i class="fa fa-circle fa-lg" style="color : #FFC0CB;"></i></a>
+		<a class="cmd cmd-widget cursor tooltips" data-cmd_id="#cyancolor_id#" title="Cyan"><i class="fa fa-circle fa-lg" style="color : #00FFFF;"></i></a>
+		<a class="cmd cmd-widget cursor tooltips" data-cmd_id="#whitecolor_id#" title="Blanc"><i class="fa fa-circle fa-lg" style="color : #FFFFFF;"></i></a>
+		<a class="cmd cmd-widget cursor tooltips" data-cmd_id="#offcolor_id#" title="Off"><i class="fa fa-circle fa-lg" style="color : #000000;"></i></a>
+     </div>
+	 <div class="center_#uid# relaiscontrol" style="display : none;">
+        <div class="relais1_state_#uid#"><i class="icon jeedom-prise relais1 cursor tooltips" title="" style="font-size: 3em;margin-left: 50px;color:grey"></i></div>
+		<div class="relais2_state_#uid#"><i class="icon jeedom-prise relais2 cursor tooltips" title="" style="font-size: 3em;margin-left: 50px;color:grey"></i></div>
+     </div>
+     </div>
+   <div class="col-sm-6" style="padding-right : 3px;padding-left : 10px;White-space:nowrap; Overflow:hidden;">
+      <span style="color:white;margin-bottom : 0px;font-size : 10px;font-weight: bold;Cursor:default"><i class="icon techno-prise-eco"></i> Batterie</span>
+	   <div class="battery_state">
+		<center><span class="battery_info tooltips" data-cmd_id="#batterystate_id#" title="Etat de l'alimentation (#batterystate#)" style="cursor : default;font-size : 40px"><i class="icon techno-cable1"></i></span></center>
+     </div>
+   </div>
+ </div>
+
+ <script>
+  $('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
+    jeedom.cmd.execute({id: '#refresh_id#'});
+  });
+  if ('#relais1info#' == '1') {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .relais1').css('color', 'white');
+  }
+  $('.eqLogic[data-eqLogic_uid=#uid#] .relais1').on('click', function() {
+        if('#relais1info#' == '1'){
+			jeedom.cmd.execute({id: '#offrelais1_id#'});
+		}else{
+			jeedom.cmd.execute({id: '#onrelais1_id#'});
+		}
+        });
+	if ('#relais2info#' == '1') {
+        $('.eqLogic[data-eqLogic_uid=#uid#] .relais2').css('color', 'white');
+  }
+  $('.eqLogic[data-eqLogic_uid=#uid#] .relais2').on('click', function() {
+        if('#relais2info#' == '1'){
+			jeedom.cmd.execute({id: '#offrelais2_id#'});
+		}else{
+			jeedom.cmd.execute({id: '#onrelais2_id#'});
+		}
+        });
+  $('.eqLogic[data-eqLogic_uid=#uid#] .cmd').on('click', function() {
+			jeedom.cmd.execute({id: $(this).data('cmd_id')});
+	});
+	$('.eqLogic[data-eqLogic_uid=#uid#] .changecmd').on('click', function () {
+		$('.eqLogic[data-eqLogic_uid=#uid#] .colorcontrol').toggle();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .relaiscontrol').toggle();
+	});
+</script>
+</div>
