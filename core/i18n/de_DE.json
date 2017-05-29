@@ -1,0 +1,41 @@
+{
+    "plugins\/center\/plugin_info\/info.xml": {
+        "Plugin pour controller le hardware de votre Jeedom Center": "Plugin zur Steuerung der Hardware Ihres Jeedom-Center",
+        "Aucune": "Ohne"
+    },
+    "plugins\/center\/core\/class\/center.class.php": {
+        "Etat Couleur": "Farbzustand",
+        "Etat relais 1": "Zustand Relais 1",
+        "Etat relais 2": "Zustand Relais 2",
+        "Rouge": "Rot",
+        "Vert": "Grün",
+        "Bleu": "Blau",
+        "Jaune": "Gelb",
+        "Rose": "Rosa",
+        "Blanc": "Weiß",
+        "Cyan": "Blaugrün (Cyan)",
+        "Off": "Aus",
+        "Off relais 1": "Relais 1 aus",
+        "On relais 1": "Relais 1 an",
+        "Off relais 2": "Relais 2 aus",
+        "On relais 2": "Relais 2 an"
+    },
+    "plugins\/center\/desktop\/php\/center.php": {
+        "Ajouter un center": "Center hinzufügen",
+        "Rechercher": "Suchen nach",
+        "Mes centers": "Meine Center",
+        "Général": "Allgemein",
+        "Nom de l'équipement": "Gerätename",
+        "Objet parent": "Eltern-Objekt",
+        "Aucun": "Ohne",
+        "Catégorie": "Kategorie",
+        "Activer": "aktivieren",
+        "Visible": "Sichtbar",
+        "Supprimer": "Löschen",
+        "Sauvegarder": "Speichern",
+        "Tableau de commandes": "Bedienfeld",
+        "Nom": "Name",
+        "Options": "Optionen",
+        "Action": "Aktion"
+    }
+}
