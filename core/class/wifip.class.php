@@ -85,7 +85,7 @@ class wifip extends eqLogic {
 	}
 	
 	public static function start() {
-		log::add('wifip','debug','Jeedom started checking all connections');
+		log::add('wifip','debug',__('Jeedom started checking all connections',__FILE__));
 		shell_exec('sudo connmanctl enable wifi');
 		shell_exec('sudo connmanctl scan wifi');
 		foreach (eqLogic::byType('wifip') as $wifip) {
@@ -101,7 +101,7 @@ class wifip extends eqLogic {
 		$return =[];
 		if ($eqLogic[0]->getConfiguration('wifiEnabled') == true || $forced === true){
 			shell_exec('sudo connmanctl enable wifi');
-			$scanresult = shell_exec('sudo connmanctl scan wifi');
+			$scanresult = shell_exec(__('sudo connmanctl scan wifi',__FILE__));
 			$services = shell_exec('sudo connmanctl services');
 			$results = explode("\n", $services);
 			$return = array();
@@ -123,7 +123,7 @@ class wifip extends eqLogic {
 	
 	public static function wifiConnect() {
 		$eqLogic = eqLogic::byType('wifip');
-		if ($eqLogic[0]->getConfiguration('wifiEnabled') == true){
+		if ($eqLogic[0]->getConfiguration('wifiEnabled') === true){
 			$idwifi =  $eqLogic[0]->getConfiguration('wifiSsid');
 			$infowifi = explode('#|#',$idwifi);
 			$keywifi = $eqLogic[0]->getConfiguration('wifiPassword');
@@ -138,7 +138,7 @@ AutoConnect=true
 			}
 			file_put_contents('/tmp/' . $infowifi[0] . '/settings', $confFile );
 			exec('sudo rm -rf /var/lib/connman/' . $infowifi[0] . '; sudo cp -R /tmp/' . $infowifi[0] . ' /var/lib/connman/;sudo chown -R root:root /var/lib/connman/' . $infowifi[0] . ';sudo chmod -R 644 /var/lib/connman/' . $infowifi[0]);
-			if ($eqLogic[0]->getConfiguration('ipfixwifienabled') == true){
+			if ($eqLogic[0]->getConfiguration('ipfixwifienabled') === true){
 				$fixip = $eqLogic[0]->getConfiguration('ipfixwifi');
 				$netmask = $eqLogic[0]->getConfiguration('netmaskwifi');
 				$gateway = $eqLogic[0]->getConfiguration('gatewaywifi');
@@ -400,4 +400,3 @@ class wifipCmd extends cmd {
 
 	/************************Getteur Setteur****************************/
 }
-?>
