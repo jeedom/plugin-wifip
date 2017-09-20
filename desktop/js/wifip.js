@@ -23,11 +23,11 @@ printMacLan();
 printMacWifi();
 printTether();
 
-if ($('.ipfixwifienabled').bootstrapSwitch('state') === true) {
+if ($('.ipfixwifienabled').checked) {
 	$('.ipfixewifi').css('display', 'block');
 }
 
-if ($('.ipfixenabled').bootstrapSwitch('state') === true) {
+if ($('.ipfixenabled').checked) {
 	$('.ipfixe').css('display', 'block');
 }
  
@@ -157,7 +157,7 @@ function addCmdToTable(_cmd) {
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="id" style="display : none;">';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="name"></td>';
      tr += '<td>';
-    tr += '<span><input type="checkbox" data-size="mini" data-label-text="{{Historiser}}" class="cmdAttr bootstrapSwitch" data-l1key="isHistorized" /></span> ';
+    tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span> ';
     tr += '</td>';
     tr += '<td>';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="type" style="display : none;">';
@@ -171,4 +171,4 @@ function addCmdToTable(_cmd) {
     $('#table_cmd tbody').append(tr);
     $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
     jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
-}
+}	

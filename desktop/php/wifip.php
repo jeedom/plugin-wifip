@@ -46,6 +46,17 @@ $eqLogics = eqLogic::byType('wifip');
             </div>  
 
     <div class="col-lg-10 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+	<a class="btn btn-success eqLogicAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
+  <a class="btn btn-danger eqLogicAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
+  <a class="btn btn-default eqLogicAction pull-right" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fa fa-arrow-circle-left"></i></a></li>
+    <li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-tachometer"></i> {{Equipement}}</a></li>
+    <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li>
+  </ul>
+  <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
+    <div role="tabpanel" class="tab-pane active" id="eqlogictab"><br/>
+      <div class="row">
 	<div class="col-sm-7">
        <form class="form-horizontal">
             <fieldset>
@@ -72,20 +83,20 @@ $eqLogics = eqLogic::byType('wifip');
                     </div>
                 </div>
                  <div class="form-group">
-                <label class="col-sm-3 control-label" ></label>
+                <label class="col-sm-3 control-label"></label>
                 <div class="col-sm-9">
-					<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
-                  <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
+                  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
+                  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
                 </div>
-                </div>
+              </div>
 				<legend><i class="fa fa-wifi"></i>  {{Wifi}}</legend>
                 <div class="form-group">
-                    <label class="col-lg-3 control-label">{{Activer le wifi}}</label>
-                    <div class="col-lg-4">
-                        <input type="checkbox" class="eqLogicAttr bootstrapSwitch wifion" data-l1key="configuration" data-l2key="wifiEnabled" onchange="if(this.checked == true){$('.wifi').css('display', 'block');$('.tetherenabled').bootstrapSwitch('state', false);} else {$('.wifi').css('display', 'none');}" unchecked/>
-                    </div>
-                </div>
-                <div class="form-group wifi">
+				<div class="col-lg-3">
+				</div>
+					<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr ipfixwifienabled" data-l1key="configuration" data-l2key="wifiEnabled" onchange="if(this.checked == true){$('.wifi').css('display', 'block');$('.tetherenabled').prop('checked', true);} else {$('.wifi').css('display', 'none');}" unchecked/>{{Activer le wifi}}</label>
+            
+				</div>
+                <div class="form-group wifi" style="display:none">
                     <label class="col-lg-3 control-label">{{Réseau wifi}}</label>
                     <div class="col-lg-4">
                         <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="wifiSsid" ></select>
@@ -94,7 +105,7 @@ $eqLogics = eqLogic::byType('wifip');
                 <a class="btn btn-info" id="bt_refreshWifiList"><i class="fa fa-refresh"></i></a>
             </div>
                 </div>
-                <div class="form-group wifi">
+                <div class="form-group wifi" style="display:none">
                     <label class="col-lg-3 control-label">{{Clef}}</label>
                     <div class="col-lg-4">
                          <input type="password" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="wifiPassword" />
@@ -102,10 +113,9 @@ $eqLogics = eqLogic::byType('wifip');
                 </div>
 				<div class="expertModeVisible">
 				<div class="form-group">
-                    <label class="col-lg-3 control-label">{{Ip Fixe Wifi}}</label>
-                    <div class="col-lg-4">
-                         <input type="checkbox" class="eqLogicAttr bootstrapSwitch ipfixwifienabled" data-l1key="configuration" data-l2key="ipfixwifienabled" onchange="if(this.checked == true){$('.ipfixewifi').css('display', 'block');} else {$('.ipfixewifi').css('display', 'none');}" unchecked/>
-                    </div>
+				<div class="col-lg-3">
+				</div>
+				 <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr ipfixwifienabled" data-l1key="configuration" data-l2key="ipfixwifienabled" onchange="if(this.checked == true){$('.ipfixewifi').css('display', 'block');} else {$('.ipfixewifi').css('display', 'none');}" unchecked/>{{Ip Fixe Wifi}}</label>
                 </div>
 				<div class="form-group ipfixewifi" style="display : none;">
 					<div class="alert alert-danger col-lg-12">
@@ -134,10 +144,9 @@ $eqLogics = eqLogic::byType('wifip');
 				<div class="expertModeVisible">
 				<legend><i class="fa fa-rss"></i>  {{Tethering}}</legend>
 				<div class="form-group">
-				<label class="col-lg-3 control-label">{{Activer Tether}}</label>
-                    <div class="col-lg-4">
-                        <input type="checkbox" class="eqLogicAttr bootstrapSwitch tetherenabled" data-l1key="configuration" data-l2key="tetherenabled" onchange="if(this.checked == true){$('.wifion').bootstrapSwitch('state', false);$('.ipfixwifienabled').bootstrapSwitch('state', false);$('.tetheron').css('display', 'block');} else {$('.tetheron').css('display', 'none');}"/>
-                    </div>
+				<div class="col-lg-3">
+				</div>
+				<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr ipfixwifienabled" data-l1key="configuration" data-l2key="tetherenabled" onchange="if(this.checked == true){$('.wifion').prop('checked', true);$('.ipfixwifienabled').prop('checked', true);$('.tetheron').css('display', 'block');} else {$('.tetheron').css('display', 'none');}" unchecked/>{{Activer Tether}}</label>
 				</div>
 				<div class="form-group tetheron" style="display : none;">
 					<div class="alert alert-danger col-lg-12">
@@ -154,29 +163,28 @@ $eqLogics = eqLogic::byType('wifip');
 				<div class="expertModeVisible">
 				<legend><i class="fa fa-wrench"></i>  {{Ethernet}}</legend>
 				<div class="form-group">
-				<label class="col-lg-3 control-label">{{Activer ip fixe}}</label>
-                    <div class="col-lg-4">
-                        <input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-l1key="configuration" data-l2key="ipfixenabled" onchange="if(this.checked == true){$('.ipfixe').css('display', 'block');} else {$('.ipfixe').css('display', 'none');}"/>
-                    </div>
+				<div class="col-lg-3">
 				</div>
-				<div class="form-group ipfixe">
+				<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr ipfixwifienabled" data-l1key="configuration" data-l2key="ipfixenabled" onchange="if(this.checked == true){$('.ipfixe').css('display', 'block');} else {$('.ipfixe').css('display', 'none');}" unchecked/>{{Activer ip fixe}}</label>
+				</div>
+				<div class="form-group ipfixe" style="display:none">
 					<div class="alert alert-danger col-lg-12">
 						{{Attention le réglage d'une ip fixe peut rendre votre box invisible du réseau. Vérifiez bien les infos renseignées !! }}
 					</div>
                 </div>
-				<div class="form-group ipfixe">
+				<div class="form-group ipfixe" style="display:none">
                     <label class="col-lg-3 control-label">{{IP fixe}}</label>
                     <div class="col-lg-4">
                          <input type="input" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ipfix" />
                     </div>
                 </div>
-				<div class="form-group ipfixe">
+				<div class="form-group ipfixe" style="display:none">
                     <label class="col-lg-3 control-label">{{Netmask}}</label>
                     <div class="col-lg-4">
                          <input type="input" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="netmask"  />
                     </div>
                 </div>
-				<div class="form-group ipfixe">
+				<div class="form-group ipfixe" style="display:none">
                     <label class="col-lg-3 control-label">{{Gateway}}</label>
                     <div class="col-lg-4">
                          <input type="input" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="gateway"  />
@@ -241,16 +249,10 @@ $eqLogics = eqLogic::byType('wifip');
                 </div>
 </fieldset>
 </form>
-		<form class="form-horizontal">
-            <fieldset>
-                <div class="form-actions">
-                    <a class="btn btn-danger eqLogicAction" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
-                    <a class="btn btn-success eqLogicAction" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
-                </div>
-            </fieldset>
-        </form>
 </div>
-        <legend><i class="fa fa-list-alt"></i>  {{Tableau de commandes}}</legend>
+</div>
+</div>
+<div role="tabpanel" class="tab-pane" id="commandtab">
        <table id="table_cmd" class="table table-bordered table-condensed">
              <thead>
                 <tr>
@@ -262,16 +264,9 @@ $eqLogics = eqLogic::byType('wifip');
             </tbody>
         </table>
 
-        <form class="form-horizontal">
-            <fieldset>
-                <div class="form-actions">
-                    <a class="btn btn-danger eqLogicAction" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
-                    <a class="btn btn-success eqLogicAction" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
-                </div>
-            </fieldset>
-        </form>
-
     </div>
+</div>
+</div>
 </div>
 
 <?php include_file('desktop', 'wifip', 'js', 'wifip'); ?>
