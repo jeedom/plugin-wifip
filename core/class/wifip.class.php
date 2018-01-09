@@ -95,6 +95,20 @@ class wifip extends eqLogic {
        }
 	}
 	
+	public static function dependancy_info() {
+		$return = array();
+		$return['progress_file'] = jeedom::getTmpFolder('wifip') . '/dependance';
+		$return['state'] = 'ok';
+		if (exec(system::getCmdSudo() . system::get('cmd_check') . '-E "wpasupplicant|wireless\-tools" | wc -l') < 2) {
+			$return['state'] = 'nok';
+		}
+		return $return;
+	}
+	public static function dependancy_install() {
+		log::remove(__CLASS__ . '_update');
+		return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('wifip') . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
+	}
+	
 	public static function listWifi($forced = false) {
 		$eqLogic = eqLogic::byType('wifip');
 					log::add('wifip','debug',$eqLogic[0]->getConfiguration('wifiEnabled'));

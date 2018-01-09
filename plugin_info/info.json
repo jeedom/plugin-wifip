@@ -6,6 +6,7 @@
 	"author" : "Ludovic SARAKHA",
 	"require" : "3.0",
 	"category" : "communication",
+	"hasDependency" : true,
 	"changelog" : "https://github.com/jeedom/plugin-wifip/blob/stable/doc/#language#/changelog.asciidoc",
 	"documentation" : "https://github.com/jeedom/plugin-wifip/blob/stable/doc/#language#/index.asciidoc"
 }
