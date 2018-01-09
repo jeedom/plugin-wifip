@@ -60,7 +60,7 @@ $eqLogics = eqLogic::byType('wifip');
 	<div class="col-sm-7">
        <form class="form-horizontal">
             <fieldset>
-                <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}<i class='fa fa-cogs eqLogicAction pull-right cursor expertModeVisible' data-action='configure'></i></legend>
+                <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}<i class='fa fa-cogs eqLogicAction pull-right cursor' data-action='configure'></i></legend>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">{{Nom de l'équipement}}</label>
                     <div class="col-lg-4">
@@ -111,7 +111,7 @@ $eqLogics = eqLogic::byType('wifip');
                          <input type="password" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="wifiPassword" />
                     </div>
                 </div>
-				<div class="expertModeVisible">
+				<div>
 				<div class="form-group">
 				<div class="col-lg-3">
 				</div>
@@ -141,7 +141,7 @@ $eqLogics = eqLogic::byType('wifip');
                     </div>
                 </div>
 				</div>
-				<div class="expertModeVisible">
+				<div>
 				<legend><i class="fa fa-rss"></i>  {{Tethering}}</legend>
 				<div class="form-group">
 				<div class="col-lg-3">
@@ -160,7 +160,7 @@ $eqLogics = eqLogic::byType('wifip');
                     </div>
                 </div>
 				</div>
-				<div class="expertModeVisible">
+				<div>
 				<legend><i class="fa fa-wrench"></i>  {{Ethernet}}</legend>
 				<div class="form-group">
 				<div class="col-lg-3">
