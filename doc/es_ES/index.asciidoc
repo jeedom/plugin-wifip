@@ -1,6 +1,6 @@
 == Waze in Time
 
-=== Description
+=== Descripción
 Ce plugin permet d'avoir les infos de trajet (traffic pris en compte) via Waze. Ce plugin peux ne plus marcher si Waze n'acceptes plus qu'on interroge son site
 
 image:../images/wazeintime_screenshot1.jpg[width=256]

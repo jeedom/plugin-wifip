@@ -1,7 +1,7 @@
 {
     "plugins\/center\/plugin_info\/info.xml": {
         "Plugin pour controller le hardware de votre Jeedom Center": "Plugin pour controller le hardware de votre Jeedom Center",
-        "Aucune": "Aucune"
+        "Aucune": "tidak"
     },
     "plugins\/center\/core\/class\/center.class.php": {
         "Etat Couleur": "Etat Couleur",
@@ -11,7 +11,7 @@
         "Vert": "Vert",
         "Bleu": "Bleu",
         "Jaune": "Jaune",
-        "Rose": "Rose",
+        "Rose": "berwarna merah muda",
         "Blanc": "Blanc",
         "Cyan": "Cyan",
         "Off": "Off",
@@ -33,9 +33,9 @@
         "Visible": "Terlihat",
         "Supprimer": "Menghapus",
         "Sauvegarder": "Menyimpan",
-        "Tableau de commandes": "Tableau de commandes",
+        "Tableau de commandes": "panel kontrol",
         "Nom": "Nama",
-        "Options": "Options",
+        "Options": "Pilihan",
         "Action": "Action"
     }
 }
