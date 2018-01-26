@@ -1,29 +1,29 @@
 {
     "plugins\/center\/plugin_info\/info.xml": {
-        "Plugin pour controller le hardware de votre Jeedom Center": "Plugin pour controller le hardware de votre Jeedom Center",
+        "Plugin pour controller le hardware de votre Jeedom Center": "Plugin untuk memeriksa hardware dari Jeedom Center",
         "Aucune": "tidak"
     },
     "plugins\/center\/core\/class\/center.class.php": {
-        "Etat Couleur": "Etat Couleur",
-        "Etat relais 1": "Etat relais 1",
-        "Etat relais 2": "Etat relais 2",
-        "Rouge": "Rouge",
-        "Vert": "Vert",
-        "Bleu": "Bleu",
-        "Jaune": "Jaune",
+        "Etat Couleur": "Warna negara",
+        "Etat relais 1": "Relay negara 1",
+        "Etat relais 2": "State Relay 2",
+        "Rouge": "merah",
+        "Vert": "hijau",
+        "Bleu": "biru",
+        "Jaune": "kuning",
         "Rose": "berwarna merah muda",
-        "Blanc": "Blanc",
-        "Cyan": "Cyan",
-        "Off": "Off",
-        "Off relais 1": "Off relais 1",
-        "On relais 1": "On relais 1",
-        "Off relais 2": "Off relais 2",
-        "On relais 2": "On relais 2"
+        "Blanc": "putih",
+        "Cyan": "cyan",
+        "Off": "lepas",
+        "Off relais 1": "Off Relay 1",
+        "On relais 1": "Satu relay 1",
+        "Off relais 2": "Off Relay 2",
+        "On relais 2": "Satu relay 2"
     },
     "plugins\/center\/desktop\/php\/center.php": {
-        "Ajouter un center": "Ajouter un center",
+        "Ajouter un center": "Tambah pusat",
         "Rechercher": "Mencari",
-        "Mes centers": "Mes centers",
+        "Mes centers": "pusat saya",
         "Général": "Umum",
         "Nom de l'équipement": "Nama peralatan",
         "Objet parent": "Objek induk",
@@ -36,6 +36,6 @@
         "Tableau de commandes": "panel kontrol",
         "Nom": "Nama",
         "Options": "Pilihan",
-        "Action": "Action"
+        "Action": "tindakan"
     }
 }
