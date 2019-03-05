@@ -52,7 +52,11 @@ class wifip extends eqLogic {
 			$wifip->checkAndUpdateCmd('signal', $wifisignal);
 			$wifip->checkAndUpdateCmd('lanip', $lanIp);
 			$wifip->checkAndUpdateCmd('wifiip', $wifiIp);
-			$wifip->checkAndUpdateCmd('ssid', $wifip->getConfiguration('wifiSsid',''));
+			if ($wifip->getConfiguration('wifiEnabled',0) == 1){
+				$wifip->checkAndUpdateCmd('ssid', $wifip->getConfiguration('wifiSsid',''));
+			} else {
+				$wifip->checkAndUpdateCmd('ssid', 'Aucun');
+			}
 		}
 	}
 	
@@ -140,7 +144,8 @@ class wifip extends eqLogic {
 				shell_exec($exec);
 			}
 		} else {
-			log::add('wifip','debug','Executing nmcli dev disconnect wlan0');
+			log::add('wifip','debug','Executing sudo nmcli dev disconnect wlan0');
+			shell_exec('sudo nmcli dev disconnect wlan0');
 		}
 	}
 
