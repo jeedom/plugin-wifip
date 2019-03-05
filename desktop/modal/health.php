@@ -26,41 +26,20 @@ $eqLogics = wifip::byType('wifip');
 		<tr>
 			<th>{{Module}}</th>
 			<th>{{ID}}</th>
-			<th>{{Ip Fixe Lan}}</th>
 			<th>{{Wifi}}</th>
-			<th>{{Ip Fixe Wifi}}</th>
-			<th>{{Tethering}}</th>
 		</tr>
 	</thead>
 	<tbody>
 	 <?php
 foreach ($eqLogics as $eqLogic) {
-	if ($eqLogic->getConfiguration('ipfixenabled')) {
-		$ipfix = '<td><span class="label label-success" style="font-size : 1em;">' . $eqLogic->getConfiguration('ipfix') . '</span></td>';
-	} else {
-		$ipfix = '<td><span class="label label-danger" style="font-size : 1em;">OFF</span></td>';
-	}
 	if ($eqLogic->getConfiguration('wifiEnabled')) {
 		$wifi = '<td><span class="label label-success" style="font-size : 1em;">ON</span></td>';
 	} else {
 		$wifi = '<td><span class="label label-danger" style="font-size : 1em;">OFF</span></td>';
 	}
-	if ($eqLogic->getConfiguration('ipfixwifienabled')) {
-		$ipfixwifi = '<td><span class="label label-success" style="font-size : 1em;">' . $eqLogic->getConfiguration('ipfixwifi') . '</span></td>';
-	} else {
-		$ipfixwifi = '<td><span class="label label-danger" style="font-size : 1em;">OFF</span></td>';
-	}
-	if ($eqLogic->getConfiguration('tetherenabled')) {
-		$tether = '<td><span class="label label-success" style="font-size : 1em;">ON</span></td>';
-	} else {
-		$tether = '<td><span class="label label-danger" style="font-size : 1em;">OFF</span></td>';
-	}
 	echo '<tr><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
 	echo '<td><span class="label label-info" style="font-size : 1em;">' . $eqLogic->getId() . '</span></td>';
-	echo $ipfix;
 	echo $wifi;
-	echo $ipfixwifi;
-	echo $tether;
 }
 ?>
 	</tbody>
