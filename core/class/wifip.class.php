@@ -124,10 +124,7 @@ class wifip extends eqLogic {
 		return [$interfaceMac,$interfaceIp];
 	}
 	
-	public function wifiConnect($forced=false) {
-		if ($forced) {
-			$this->setConfiguration('wifiEnabled', true);
-		}
+	public function wifiConnect() {
 		if ($this->getConfiguration('wifiEnabled') == true){
 			$ssid = $this->getConfiguration('wifiSsid','');
 			if (self::isWificonnected($ssid) === false) {
@@ -145,19 +142,10 @@ class wifip extends eqLogic {
 				shell_exec($exec);
 			}
 		} else {
-			$ssid = $this->getConfiguration('wifiSsid','');
 			foreach (range(0, 3) as $number) {
 				log::add('wifip','debug','Executing nmcli dev disconnect wlan' . $number);
 				shell_exec("sudo nmcli dev disconnect wlan" . $number);
 			}
-		}
-	}
-	
-	public function wifiDisConnect() {
-		$this->setConfiguration('wifiEnabled', false);
-		foreach (range(0, 3) as $number) {
-			log::add('wifip','debug','Executing nmcli dev disconnect wlan' . $number);
-			shell_exec("sudo nmcli dev disconnect wlan" . $number);
 		}
 	}
 
@@ -274,23 +262,16 @@ class wifipCmd extends cmd {
 		$eqLogic = $this->getEqlogic();
 		$action = $this->getLogicalId();
 		switch ($action) {
-			case 'refresh':
-				$eqLogic->cron5($eqLogic->getId());
-				return;
-				break;
 			case 'connect':
 				$eqLogic->setConfiguration('wifiEnabled', true);
 				$eqLogic->save();
-				$eqLogic->wifiConnect();
-				$eqLogic->cron5($eqLogic->getId());
 				break;
 			case 'disconnect':
 				$eqLogic->setConfiguration('wifiEnabled', false);
 				$eqLogic->save();
-				$eqLogic->wifiDisConnect();
-				$eqLogic->cron5($eqLogic->getId());
 				break;
 		}
+		$eqLogic->cron5($eqLogic->getId());
 	}
 
 	/************************Getteur Setteur****************************/
