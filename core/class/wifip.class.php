@@ -67,7 +67,7 @@ class wifip extends eqLogic {
 		$return = array();
 		$return['progress_file'] = jeedom::getTmpFolder('wifip') . '/dependance';
 		$return['state'] = 'ok';
-		if (exec(system::getCmdSudo() . system::get('cmd_check') . '-E "wpasupplicant|wireless\-tools|network-manager" | wc -l') < 3) {
+		if (exec(system::getCmdSudo() . system::get('cmd_check') . '-E "wpasupplicant|wireless\-tools|network\-manager" | wc -l') < 3) {
 			$return['state'] = 'nok';
 		}
 		return $return;
