@@ -42,9 +42,9 @@ class wifip extends eqLogic {
 			} else {
 				$wifiup = (trim(file_get_contents("/sys/class/net/wlan0/operstate")) == 'up') ? 1 : 0;
 			}
-			$wifisignal = str_replace('.', '', shell_exec("tail -n +3 /proc/net/wireless | awk '{ print $3 }'"));
-			$wifiIp= shell_exec("ifconfig wlan0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
-			$lanIp= shell_exec("ifconfig eth0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
+			$wifisignal = str_replace('.', '', shell_exec("sudo tail -n +3 /proc/net/wireless | awk '{ print $3 }'"));
+			$wifiIp= shell_exec("sudo ifconfig wlan0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
+			$lanIp= shell_exec("sudo ifconfig eth0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
 			log::add('wifip','debug','Lan Ip is :' . $lanIp);
 			log::add('wifip','debug','Wifi Ip is :' . $wifiIp);
 			$wifip->checkAndUpdateCmd('isconnect', $wifiup);
@@ -119,8 +119,8 @@ class wifip extends eqLogic {
 	}
 
 	public static function getMac($_interface = 'eth0') {
-		$interfaceIp= shell_exec("ifconfig $_interface | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
-		$interfaceMac = shell_exec("ip addr show $_interface | grep -i 'link/ether' | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | sed -n 1p");
+		$interfaceIp= shell_exec("sudo ifconfig $_interface | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
+		$interfaceMac = shell_exec("sudo ip addr show $_interface | grep -i 'link/ether' | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | sed -n 1p");
 		return [$interfaceMac,$interfaceIp];
 	}
 	
@@ -179,7 +179,7 @@ class wifip extends eqLogic {
 			$disconnect = new wifipCmd();
 			$disconnect->setLogicalId('disconnect');
 			$disconnect->setIsVisible(1);
-			$disconnect->setName(__('DÃ©connecter Wifi', __FILE__));
+			$disconnect->setName(__('Déconnecter Wifi', __FILE__));
 		}
 		$disconnect->setType('action');
 		$disconnect->setSubType('other');
