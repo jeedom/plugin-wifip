@@ -29,9 +29,9 @@ class wifip extends eqLogic {
 			$eqLogics = eqLogic::byType('wifip');
 		}
 		foreach ($eqLogics as $wifip) {
+			log::add('wifip', 'debug', 'Pull Cron pour wifip');
 			$wifip->wifiConnect();
 			if ($wifip->getIsEnable() != 1) {continue;};
-			log::add('wifip', 'debug', 'Pull Cron pour wifip');
 			if (!file_exists("/sys/class/net/eth0/operstate")) {
 				$ethup = 0;
 			} else {
