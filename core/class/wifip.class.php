@@ -30,9 +30,6 @@ class wifip extends eqLogic {
 		}
 		foreach ($eqLogics as $wifip) {
 			$wifip->wifiConnect();
-			$wifip->tetherOn();
-			$wifip->ethConnect();
-			$changed = false;
 			if ($wifip->getIsEnable() != 1) {continue;};
 			log::add('wifip', 'debug', 'Pull Cron pour wifip');
 			if (!file_exists("/sys/class/net/eth0/operstate")) {
@@ -48,258 +45,122 @@ class wifip extends eqLogic {
 			$wifisignal = str_replace('.', '', shell_exec("tail -n +3 /proc/net/wireless | awk '{ print $3 }'"));
 			$wifiIp= shell_exec("ifconfig wlan0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
 			$lanIp= shell_exec("ifconfig eth0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
-			
-		log::add('wifip','debug',$lanIp);
-			$tetherIp= shell_exec("ifconfig tether | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
-			$isconnectcmd = $wifip->getCmd(null, 'isconnect');
-			if (is_object($isconnectcmd)) {
-				$isconnectcmd_value = $isconnectcmd->execCmd();
-				if ($isconnectcmd_value == null || $isconnectcmd_value != $isconnectcmd->formatValue($wifiup)) {
-					$changed = true;
-					$isconnectcmd->setCollectDate('');
-					$isconnectcmd->event($wifiup);
-				}
-			}
-			$isconnectethcmd = $wifip->getCmd(null, 'isconnecteth');
-			if (is_object($isconnectethcmd)) {
-				$isconnectethcmd_value = $isconnectethcmd->execCmd();
-				if ($isconnectethcmd_value == null || $isconnectethcmd_value != $isconnectethcmd->formatValue($ethup)) {
-					$changed = true;
-					$isconnectethcmd->setCollectDate('');
-					$isconnectethcmd->event($ethup);
-				}
-			}
-			$signalcmd = $wifip->getCmd(null, 'signal');
-			if (is_object($signalcmd)) {
-				$signalcmd_value = $signalcmd->execCmd();
-				if ($signalcmd_value == null || $signalcmd_value != $signalcmd->formatValue($wifisignal)) {
-					$changed = true;
-					$signalcmd->setCollectDate('');
-					$signalcmd->event($wifisignal);
-				}
-			}
-			if ($changed == true) {
-				$wifip->refreshWidget();
-			}
+			log::add('wifip','debug','Lan Ip is :' . $lanIp);
+			log::add('wifip','debug','Wifi Ip is :' . $wifiIp);
+			$wifip->checkAndUpdateCmd('isconnect', $wifiup);
+			$wifip->checkAndUpdateCmd('isconnecteth', $ethup);
+			$wifip->checkAndUpdateCmd('signal', $wifisignal);
+			$wifip->checkAndUpdateCmd('lanip', $lanIp);
+			$wifip->checkAndUpdateCmd('wifiip', $wifiIp);
+			$wifip->checkAndUpdateCmd('ssid', $wifip->getConfiguration('wifiSsid',''));
 		}
 	}
 	
 	public static function start() {
 		log::add('wifip','debug','Jeedom started checking all connections');
-		shell_exec('sudo connmanctl enable wifi');
-		shell_exec('sudo connmanctl scan wifi');
 		foreach (eqLogic::byType('wifip') as $wifip) {
 			$wifip->wifiConnect();
-			$wifip->ethConnect();
-			$wifip->tetherOn();
-       }
+		}
 	}
 	
 	public static function dependancy_info() {
 		$return = array();
 		$return['progress_file'] = jeedom::getTmpFolder('wifip') . '/dependance';
 		$return['state'] = 'ok';
-		if (exec(system::getCmdSudo() . system::get('cmd_check') . '-E "wpasupplicant|wireless\-tools" | wc -l') < 2) {
+		if (exec(system::getCmdSudo() . system::get('cmd_check') . '-E "wpasupplicant|wireless\-tools|network-manager" | wc -l') < 3) {
 			$return['state'] = 'nok';
 		}
 		return $return;
 	}
+	
 	public static function dependancy_install() {
 		log::remove(__CLASS__ . '_update');
 		return array('script' => dirname(__FILE__) . '/../../resources/install_#stype#.sh ' . jeedom::getTmpFolder('wifip') . '/dependance', 'log' => log::getPathToLog(__CLASS__ . '_update'));
 	}
 	
+	public static function isWificonnected ($ssid) {
+		$result = shell_exec("sudo nmcli d | grep '" . $ssid . "'");
+		log::add('wifip','debug',$result);
+		if (strpos($result,' connected ') === false){
+			return false;
+		}
+		return true;
+	}
+	
 	public static function listWifi($forced = false) {
 		$eqLogic = eqLogic::byType('wifip');
-					log::add('wifip','debug',$eqLogic[0]->getConfiguration('wifiEnabled'));
+		log::add('wifip','debug','Wifi enabled : ' . $eqLogic[0]->getConfiguration('wifiEnabled'));
 		$return =[];
-		if ($eqLogic[0]->getConfiguration('wifiEnabled') == true || $forced === true){
-			shell_exec('sudo connmanctl enable wifi');
-			$scanresult = shell_exec('sudo connmanctl scan wifi');
-			$services = shell_exec('sudo connmanctl services');
-			$results = explode("\n", $services);
+		if ($eqLogic[0]->getConfiguration('wifiEnabled') == true || $forced == true){
+			$scanresult = shell_exec('sudo nmcli -f SSID,SIGNAL,SECURITY,CHAN -t -m tabular dev wifi list');
+			$results = explode("\n", $scanresult);
 			$return = array();
 			foreach ($results as $result) {
-				if (strpos($result, 'wifi') !== false && strpos($result, 'hidden') === false) {
-					$options = trim(substr($result,0,strpos($result,' ')));
-					$result = substr($result, strpos($result,' '), strlen($result));
-					$idwifi = trim(substr($result,strrpos($result,' '),strlen($result)));
-					$ssid = trim(substr($result,0,strrpos($result,' ')));
-					log::add('wifip','debug',$idwifi . '|' . $ssid . '|' . $options);
-					if ($ssid != '' && !isset($return[$idwifi])) {
-						$return[$idwifi] = $ssid;
+				log::add('wifip','debug',$result);
+				$result = str_replace('\:','$%$%',$result);
+				$wifiDetail = explode(':',$result);
+				$chan = $wifiDetail[3];
+				$security = $wifiDetail[2];
+				if ($security == ''){
+					$security = 'Aucune';
+				}
+				$signal =  $wifiDetail[1];
+				$ssid = str_replace('$%$%','\:',$wifiDetail[0]);
+				if ($ssid != '') {
+					log::add('wifip','debug',$ssid . ' with signal ' . $signal . ' and security ' . $security . ' on channel ' . $chan);
+					if (isset($return[$ssid]) && $return[$ssid]['signal']> $signal){
+						continue;
 					}
+					$return[$ssid] = array('ssid' => $ssid,'signal'=>$signal,'security'=>$security,'channel'=>$chan);
 				}
 			}
 		}
 		return $return;
 	}
-	
-	public static function wifiConnect() {
-		$eqLogic = eqLogic::byType('wifip');
-		if ($eqLogic[0]->getConfiguration('wifiEnabled') == true){
-			$idwifi =  $eqLogic[0]->getConfiguration('wifiSsid');
-			$infowifi = explode('#|#',$idwifi);
-			$keywifi = $eqLogic[0]->getConfiguration('wifiPassword');
-			$confFile = "[" . $infowifi[0] . "]
-Type = wifi
-Name = " . $infowifi[1] . "
-Passphrase = " . $keywifi . "
-AutoConnect=true
-";
-			if (!is_dir('/tmp/' . $infowifi[0])) {
-				mkdir('/tmp/' . $infowifi[0]);
-			}
-			file_put_contents('/tmp/' . $infowifi[0] . '/settings', $confFile );
-			exec('sudo rm -rf /var/lib/connman/' . $infowifi[0] . '; sudo cp -R /tmp/' . $infowifi[0] . ' /var/lib/connman/;sudo chown -R root:root /var/lib/connman/' . $infowifi[0] . ';sudo chmod -R 644 /var/lib/connman/' . $infowifi[0]);
-			if ($eqLogic[0]->getConfiguration('ipfixwifienabled') == true){
-				$fixip = $eqLogic[0]->getConfiguration('ipfixwifi');
-				$netmask = $eqLogic[0]->getConfiguration('netmaskwifi');
-				$gateway = $eqLogic[0]->getConfiguration('gatewaywifi');
-				shell_exec('sudo connmanctl config ' . $infowifi[0] . ' --ipv4 manual ' . $fixip . ' ' . $netmask . ' ' . $gateway);
-				log::add('wifip','debug','sudo connmanctl config ' . $infowifi[0] . ' --ipv4 manual ' . $fixip . ' ' . $netmask . ' ' . $gateway);
-			} else {
-				shell_exec('sudo connmanctl config ' . $infowifi[0] . ' --ipv4 dhcp');
-			}
-			shell_exec("sudo connmanctl connect " . $infowifi[0]);
-		} else {
-			$eqLogic[0]->wifiDisConnect();
-		}
-	}
-	
-	public static function ethConnect() {
-		$services = shell_exec('sudo connmanctl services');
-		$results = explode("\n", $services);
-		$return = array();
-		$ideth = 'none';
-		foreach ($results as $result) {
-			if (strpos($result, 'Wired') !== false) {
-				$ideth = trim(substr($result,strrpos($result,' '),strlen($result)));
-			}
-		}
-		$eqLogic = eqLogic::byType('wifip');
-		if ($eqLogic[0]->getConfiguration('ipfixenabled') == true && $ideth != 'none'){
-			$fixip = $eqLogic[0]->getConfiguration('ipfix');
-			$netmask = $eqLogic[0]->getConfiguration('netmask');
-			$gateway = $eqLogic[0]->getConfiguration('gateway');
-			shell_exec('sudo connmanctl config ' . $ideth . ' --ipv4 manual ' . $fixip . ' ' . $netmask . ' ' . $gateway);
-			log::add('wifip','debug','sudo connmanctl config ' . $ideth . ' --ipv4 manual ' . $fixip . ' ' . $netmask . ' ' . $gateway);
-		} else {
-			shell_exec('sudo connmanctl config ' . $ideth . ' --ipv4 dhcp');
-		}
-	}
-	
-	public static function tetherOn() {
-		$eqLogic = eqLogic::byType('wifip');
-		$key = $eqLogic[0]->getConfiguration('tetherkey');
-		if ($eqLogic[0]->getConfiguration('tetherenabled') == true){
-			shell_exec('sudo connmanctl tether wifi on HotpointJeedom ' . $key);
-		} else {
-			shell_exec('sudo connmanctl tether wifi off');
-		}		
-	}
-	
-	public static function wifiDisConnect() {
-		$eqLogic = eqLogic::byType('wifip');
-		$idwifi =  $eqLogic[0]->getConfiguration('wifiSsid');
-		$infowifi = explode('#|#',$idwifi);
-		shell_exec("sudo connmanctl disconnect " . $infowifi[0]);
-	}
 
 	public static function getMac($_interface = 'eth0') {
 		$interfaceIp= shell_exec("ifconfig $_interface | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
-		$interfaceMask= shell_exec("ifconfig $_interface | grep -Eo 'Mask:?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
 		$interfaceMac = shell_exec("ip addr show $_interface | grep -i 'link/ether' | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}' | sed -n 1p");
-		return [$interfaceMac,$interfaceIp,$interfaceMask];
+		return [$interfaceMac,$interfaceIp];
 	}
 	
-	public function preUpdate() {
-		if ($this->getConfiguration('ipfixwifienabled')) {
-			if ($this->getConfiguration('ipfixwifi') == '') {
-				throw new Exception(__('L\'adresse IP fixe ne peut être vide', __FILE__));
+	public function wifiConnect($forced=false) {
+		if ($forced) {
+			$this->setConfiguration('wifiEnabled', true);
+		}
+		if ($this->getConfiguration('wifiEnabled') == true){
+			$ssid = $this->getConfiguration('wifiSsid','');
+			if (self::isWificonnected($ssid) === false) {
+				log::add('wifip','debug','Not Connected to ' . $ssid . '. Connecting ...');
+				foreach (range(0, 3) as $number) {
+					shell_exec("sudo ip link set wlan" . $number . " up");
+				}
+				$password = $this->getConfiguration('wifiPassword','');
+				if ($password != ''){
+					$exec = "sudo nmcli dev wifi connect '" . $ssid . "' password '" . $password . "'";
+				} else {
+				$exec ="sudo nmcli dev wifi connect '" . $ssid . "'";
+				}
+				log::add('wifip','debug','Executing ' . $exec);
+				shell_exec($exec);
 			}
-			if ($this->isValidIP($this->getConfiguration('ipfixwifi')) == false) {
-				throw new Exception(__('L\'adresse IP fixe n\'est pas valide', __FILE__));
-			}
-			if ($this->getConfiguration('netmaskwifi') == '') {
-				throw new Exception(__('Le netmask ne peut être vide', __FILE__));
-			}
-			if ($this->isValidNetmask($this->getConfiguration('netmaskwifi')) == false) {
-				throw new Exception(__('Le netmask n\'est pas valide', __FILE__));
-			}
-			if ($this->getConfiguration('gatewaywifi') == '') {
-				throw new Exception(__('La gateway ne peut être vide', __FILE__));
-			}
-			if ($this->isValidGateway($this->getConfiguration('ipfixwifi'),$this->getConfiguration('gatewaywifi')) == false) {
-				throw new Exception(__('La gateway est invalide', __FILE__));
+		} else {
+			$ssid = $this->getConfiguration('wifiSsid','');
+			foreach (range(0, 3) as $number) {
+				log::add('wifip','debug','Executing nmcli dev disconnect wlan' . $number);
+				shell_exec("sudo nmcli dev disconnect wlan" . $number);
 			}
 		}
-		
-		if ($this->getConfiguration('tetherenabled')) {
-			if (strlen($this->getConfiguration('tetherkey')) < 8 ) {
-				throw new Exception(__('La clé tether doit faire au moins 8 caractères', __FILE__));
-			}
-		}
-		
-		if ($this->getConfiguration('ipfixenabled')) {
-			if ($this->getConfiguration('ipfix') == '') {
-				throw new Exception(__('L\'adresse IP fixe ne peut être vide', __FILE__));
-			}
-			if ($this->isValidIP($this->getConfiguration('ipfix')) == false) {
-				throw new Exception(__('L\'adresse IP fixe n\'est pas valide', __FILE__));
-			}
-			if ($this->getConfiguration('netmask') == '') {
-				throw new Exception(__('Le netmask ne peut être vide', __FILE__));
-			}
-			if ($this->isValidNetmask($this->getConfiguration('netmask')) == false) {
-				throw new Exception(__('Le netmask n\'est pas valide', __FILE__));
-			}
-			if ($this->getConfiguration('gateway') == '') {
-				throw new Exception(__('La gateway ne peut être vide', __FILE__));
-			}
-			if ($this->isValidGateway($this->getConfiguration('ipfix'),$this->getConfiguration('gateway')) == false) {
-				throw new Exception(__('La gateway est invalide', __FILE__));
-			}
+	}
+	
+	public function wifiDisConnect() {
+		$this->setConfiguration('wifiEnabled', false);
+		foreach (range(0, 3) as $number) {
+			log::add('wifip','debug','Executing nmcli dev disconnect wlan' . $number);
+			shell_exec("sudo nmcli dev disconnect wlan" . $number);
 		}
 	}
 
-	public function isValidIP($ipAddr) {
-		$parts = explode('.',$ipAddr);
-		if (count($parts) != 4)
-			return false;
-		foreach ($parts as $part) {
-			if (!preg_match('/^[0-9]+$/',$part) || intval($part) > 255 || intval($part<0))
-            return false;
-		} 
-		return true;
-	}
-	
-	public function isValidNetmask($netmask) {
-		$parts = explode('.',$netmask);
-		if (count($parts) != 4)
-			return false;
-		foreach ($parts as $part) {
-			if (!preg_match('/^[0-9]+$/',$part) || (intval($part) != 255 && intval($part !=0)))
-            return false;
-		} 
-		return true;
-	}
-	
-	public function isValidGateway($ipAddr,$gateway) {
-		$parts = explode('.',$gateway);
-		if (count($parts) != 4)
-			return false;
-		foreach ($parts as $part) {
-			if (!preg_match('/^[0-9]+$/',$part) || intval($part) > 255 || intval($part<0))
-            return false;
-		} 
-		$ipArray =  explode('.',$ipAddr);
-		if ($ipArray[0] != $parts [0] || $ipArray[1] != $parts [1]) {
-			return false;
-		}
-		return true;
-	}
-	
 	public function postSave() {
 		$connect = $this->getCmd(null, 'connect');
 		if (!is_object($connect)) {
@@ -336,17 +197,6 @@ AutoConnect=true
 		$isconnect->setSubType('binary');
 		$isconnect->save();
 		
-		$isconnecteth = $this->getCmd(null, 'isconnecteth');
-		if (!is_object($isconnecteth)) {
-			$isconnecteth = new wifipCmd();
-			$isconnecteth->setName(__('Etat Lan', __FILE__));
-		}
-		$isconnecteth->setEqLogic_id($this->getId());
-		$isconnecteth->setLogicalId('isconnecteth');
-		$isconnecteth->setType('info');
-		$isconnecteth->setSubType('binary');
-		$isconnecteth->save();
-		
 		$signal = $this->getCmd(null, 'signal');
 		if (!is_object($signal)) {
 			$signal = new wifipCmd();
@@ -357,6 +207,39 @@ AutoConnect=true
 		$signal->setType('info');
 		$signal->setSubType('numeric');
 		$signal->save();
+		
+		$lanip = $this->getCmd(null, 'lanip');
+		if (!is_object($lanip)) {
+			$lanip = new wifipCmd();
+			$lanip->setName(__('Lan IP', __FILE__));
+		}
+		$lanip->setEqLogic_id($this->getId());
+		$lanip->setLogicalId('lanip');
+		$lanip->setType('info');
+		$lanip->setSubType('string');
+		$lanip->save();
+		
+		$wifiip = $this->getCmd(null, 'wifiip');
+		if (!is_object($wifiip)) {
+			$wifiip = new wifipCmd();
+			$wifiip->setName(__('Wifi IP', __FILE__));
+		}
+		$wifiip->setEqLogic_id($this->getId());
+		$wifiip->setLogicalId('wifiip');
+		$wifiip->setType('info');
+		$wifiip->setSubType('string');
+		$wifiip->save();
+		
+		$ssid = $this->getCmd(null, 'ssid');
+		if (!is_object($ssid)) {
+			$ssid = new wifipCmd();
+			$ssid->setName(__('SSID', __FILE__));
+		}
+		$ssid->setEqLogic_id($this->getId());
+		$ssid->setLogicalId('ssid');
+		$ssid->setType('info');
+		$ssid->setSubType('string');
+		$ssid->save();
 		
 		$refresh = $this->getCmd(null, 'refresh');
 		if (!is_object($refresh)) {
@@ -372,8 +255,6 @@ AutoConnect=true
 
 	public function postAjax() {
 		$this->wifiConnect();
-		$this->ethConnect();
-		$this->tetherOn();
 	}
 }
 

@@ -11,10 +11,26 @@ apt-get update
 echo 50 > ${PROGRESS_FILE}
 apt-get install -y firmware-ralink wpasupplicant wireless-tools
 echo 60 > ${PROGRESS_FILE}
-sudo connmanctl enable wifi
+sudo apt install -y network-manager
+sudo ip link set wlan0 down
+sudo ip link set wlan0 up
 echo 100 > ${PROGRESS_FILE}
 echo "********************************************************"
 echo "*             Installation terminée                    *"
 echo "********************************************************"
-echo "########### Fin - Merci de redémarrer votre box afin d'activer le Wifi ##########"
+echo "########### Fin - Merci de redémarrer votre box dans 3 minutes afin d'activer le Wifi ##########"
+echo "********************************************************"
+echo "*             Installation terminée                    *"
+echo "********************************************************"
+echo "########### Fin - Merci de redémarrer votre box dans 3 minutes afin d'activer le Wifi ##########"
+echo "********************************************************"
+echo "*             Installation terminée                    *"
+echo "********************************************************"
+echo "########### Fin - Merci de redémarrer votre box dans 3 minutes afin d'activer le Wifi ##########"
+echo "********************************************************"
+echo "*             Installation terminée                    *"
+echo "********************************************************"
+echo "########### Fin - Merci de redémarrer votre box dans 3 minutes afin d'activer le Wifi ##########"
 rm ${PROGRESS_FILE}
+sudo apt remove -y connman
+

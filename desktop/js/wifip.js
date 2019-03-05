@@ -21,17 +21,7 @@ $('#bt_healthwifip').on('click', function () {
 printWifiList();
 printMacLan();
 printMacWifi();
-printTether();
-
-if ($('.ipfixwifienabled').checked) {
-	$('.ipfixewifi').css('display', 'block');
-}
-
-if ($('.ipfixenabled').checked) {
-	$('.ipfixe').css('display', 'block');
-}
- 
- function printWifiList($forced=false){
+function printWifiList($forced=false){
 	$.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php
             url: "plugins/wifip/core/ajax/wifip.ajax.php", // url du fichier php
@@ -51,8 +41,8 @@ if ($('.ipfixenabled').checked) {
             }
             var options = '';
             for (i in data.result){
-               options += '<option value="'+i+'#|#'+data.result[i]+'">'; 
-				options += data.result[i]; 
+               options += '<option value="'+i+'">'; 
+				options += data.result[i]['ssid'] + ' - Signal : ' + data.result[i]['signal'] + ' Canal : ' + data.result[i]['channel'] + ' Sécurité - ' + data.result[i]['security']; 
 				options += '</option>';  
             }
             $('.eqLogicAttr[data-l1key=configuration][data-l2key=wifiSsid]').empty().html(options);
@@ -81,32 +71,6 @@ function printMacLan(){
             }
             $('.macLan').empty().append(data.result[0]);
             $('.ipLan').empty().append(data.result[1]);
-            $('.maskLan').empty().append(data.result[2]);
-        }
-    });
-}
-
-function printTether(){
-	$.ajax({// fonction permettant de faire de l'ajax
-            type: "POST", // methode de transmission des données au fichier php
-            url: "plugins/wifip/core/ajax/wifip.ajax.php", // url du fichier php
-            data: {
-            	action: "macfinder",
-				interfa : "tether",
-            },
-            dataType: 'json',
-			async: true,
-			global : false,
-            error: function (request, status, error) {
-            	handleAjaxError(request, status, error);
-            },
-			success: function(data) {
-            if (data.state != 'ok') {
-            	$('#div_alert').showAlert({message: data.result, level: 'danger'});
-            	return;
-            }
-            $('.iptether').empty().append(data.result[1]);
-            $('.masktether').empty().append(data.result[2]);
         }
     });
 }
@@ -132,7 +96,6 @@ function printMacWifi(){
             }
             $('.macWifi').empty().append(data.result[0]);
             $('.ipWifi').empty().append(data.result[1]);
-            $('.maskWifi').empty().append(data.result[2]);
         }
     });
 }
@@ -144,7 +107,6 @@ $('#bt_refreshWifiList').on('click',function(){
 window.setInterval(function(){
 	printMacLan();
 	printMacWifi();
-	printTether();
 }, 5000);
 
  $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
