@@ -129,9 +129,7 @@ class wifip extends eqLogic {
 			$ssid = $this->getConfiguration('wifiSsid','');
 			if (self::isWificonnected($ssid) === false) {
 				log::add('wifip','debug','Not Connected to ' . $ssid . '. Connecting ...');
-				foreach (range(0, 3) as $number) {
-					shell_exec("sudo ip link set wlan" . $number . " up");
-				}
+				shell_exec("sudo ip link set wlan0");
 				$password = $this->getConfiguration('wifiPassword','');
 				if ($password != ''){
 					$exec = "sudo nmcli dev wifi connect '" . $ssid . "' password '" . $password . "'";
@@ -142,10 +140,7 @@ class wifip extends eqLogic {
 				shell_exec($exec);
 			}
 		} else {
-			foreach (range(0, 3) as $number) {
-				log::add('wifip','debug','Executing nmcli dev disconnect wlan' . $number);
-				shell_exec("sudo nmcli dev disconnect wlan" . $number);
-			}
+			log::add('wifip','debug','Executing nmcli dev disconnect wlan0');
 		}
 	}
 
