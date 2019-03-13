@@ -37,7 +37,7 @@ $eqLogics = eqLogic::byType('wifip');
                         $opacity = 'opacity:0.3;';
                     }
                     echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="text-align: center; background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
-                    echo '<img src="plugins/wifip/plugin_info/wifip_icon.png" height="105" width="95" />';
+                    echo '<img src="plugins/wifip/doc/images/wifip_icon.png" height="105" width="95" />';
                     echo "<br>";
                     echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $eqLogic->getHumanName(true, true) . '</span>';
                     echo '</div>';
@@ -91,14 +91,14 @@ $eqLogics = eqLogic::byType('wifip');
               </div>
 				<legend><i class="fa fa-wifi"></i>  {{Wifi}}</legend>
                 <div class="form-group">
-				<div class="col-lg-2">
+				<div class="col-lg-3">
 				</div>
-					<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr ipfixwifienabled" data-l1key="configuration" data-l2key="wifiEnabled" onchange="if(this.checked == true){$('.wifi').css('display', 'block');$} else {$('.wifi').css('display', 'none');}" unchecked/>{{Activer le wifi}}</label>
+					<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr ipfixwifienabled" data-l1key="configuration" data-l2key="wifiEnabled" onchange="if(this.checked == true){$('.wifi').css('display', 'block');$('.tetherenabled').prop('checked', true);} else {$('.wifi').css('display', 'none');}" unchecked/>{{Activer le wifi}}</label>
             
 				</div>
                 <div class="form-group wifi" style="display:none">
-                    <label class="col-lg-2 control-label">{{Réseau wifi}}</label>
-                    <div class="col-lg-8">
+                    <label class="col-lg-3 control-label">{{Réseau wifi}}</label>
+                    <div class="col-lg-4">
                         <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="wifiSsid" ></select>
                     </div>
 					<div class="col-lg-2">
@@ -106,11 +106,92 @@ $eqLogics = eqLogic::byType('wifip');
             </div>
                 </div>
                 <div class="form-group wifi" style="display:none">
-                    <label class="col-lg-2 control-label">{{Clef}}</label>
-                    <div class="col-lg-8">
+                    <label class="col-lg-3 control-label">{{Clef}}</label>
+                    <div class="col-lg-4">
                          <input type="password" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="wifiPassword" />
                     </div>
                 </div>
+				<div class="expertModeVisible">
+				<div class="form-group">
+				<div class="col-lg-3">
+				</div>
+				 <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr ipfixwifienabled" data-l1key="configuration" data-l2key="ipfixwifienabled" onchange="if(this.checked == true){$('.ipfixewifi').css('display', 'block');} else {$('.ipfixewifi').css('display', 'none');}" unchecked/>{{Ip Fixe Wifi}}</label>
+                </div>
+				<div class="form-group ipfixewifi" style="display : none;">
+					<div class="alert alert-danger col-lg-12">
+						{{Attention le réglage d'une ip fixe peut rendre votre box invisible du réseau. Vérifiez bien les infos renseignées !! }}
+					</div>
+                </div>
+				<div class="form-group ipfixewifi" style="display : none;">
+                    <label class="col-lg-3 control-label">{{IP fixe}}</label>
+                    <div class="col-lg-4">
+                         <input type="input" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ipfixwifi" />
+                    </div>
+                </div>
+				<div class="form-group ipfixewifi" style="display : none;">
+                    <label class="col-lg-3 control-label">{{Netmask}}</label>
+                    <div class="col-lg-4">
+                         <input type="input" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="netmaskwifi"  />
+                    </div>
+                </div>
+				<div class="form-group ipfixewifi" style="display : none;">
+                    <label class="col-lg-3 control-label">{{Gateway}}</label>
+                    <div class="col-lg-4">
+                         <input type="input" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="gatewaywifi"  />
+                    </div>
+                </div>
+				</div>
+				<div class="expertModeVisible">
+				<legend><i class="fa fa-rss"></i>  {{Tethering}}</legend>
+				<div class="form-group">
+				<div class="col-lg-3">
+				</div>
+				<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr ipfixwifienabled" data-l1key="configuration" data-l2key="tetherenabled" onchange="if(this.checked == true){$('.wifion').prop('checked', true);$('.ipfixwifienabled').prop('checked', true);$('.tetheron').css('display', 'block');} else {$('.tetheron').css('display', 'none');}" unchecked/>{{Activer Tether}}</label>
+				</div>
+				<div class="form-group tetheron" style="display : none;">
+					<div class="alert alert-danger col-lg-12">
+						{{Attention en activant le tether vous ne serez plus connecté au wifi. La box sera accessible en vous connectant au HotpointJeedom avec la clé et en vous rendant à l'adresse tether indiqué à droite! }}
+					</div>
+                </div>
+				<div class="form-group tetheron" style="display : none;">
+                    <label class="col-lg-3 control-label">{{Clé (8 caractères minimum)}}</label>
+                    <div class="col-lg-4">
+                         <input type="password" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="tetherkey"  />
+                    </div>
+                </div>
+				</div>
+				<div class="expertModeVisible">
+				<legend><i class="fa fa-wrench"></i>  {{Ethernet}}</legend>
+				<div class="form-group">
+				<div class="col-lg-3">
+				</div>
+				<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr ipfixwifienabled" data-l1key="configuration" data-l2key="ipfixenabled" onchange="if(this.checked == true){$('.ipfixe').css('display', 'block');} else {$('.ipfixe').css('display', 'none');}" unchecked/>{{Activer ip fixe}}</label>
+				</div>
+				<div class="form-group ipfixe" style="display:none">
+					<div class="alert alert-danger col-lg-12">
+						{{Attention le réglage d'une ip fixe peut rendre votre box invisible du réseau. Vérifiez bien les infos renseignées !! }}
+					</div>
+                </div>
+				<div class="form-group ipfixe" style="display:none">
+                    <label class="col-lg-3 control-label">{{IP fixe}}</label>
+                    <div class="col-lg-4">
+                         <input type="input" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ipfix" />
+                    </div>
+                </div>
+				<div class="form-group ipfixe" style="display:none">
+                    <label class="col-lg-3 control-label">{{Netmask}}</label>
+                    <div class="col-lg-4">
+                         <input type="input" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="netmask"  />
+                    </div>
+                </div>
+				<div class="form-group ipfixe" style="display:none">
+                    <label class="col-lg-3 control-label">{{Gateway}}</label>
+                    <div class="col-lg-4">
+                         <input type="input" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="gateway"  />
+                    </div>
+                </div>
+				</div>
+				
             </fieldset>
         </form>
 		</div>
@@ -131,6 +212,12 @@ $eqLogics = eqLogic::byType('wifip');
                     </div>
                 </div>
 				<div class="form-group">
+                    <label class="col-lg-4 control-label">{{Masque ethernet}}</label>
+                    <div class="col-lg-4">
+                        <span class="label label-info maskLan" style="font-size:1em;cursor:default;"></span>
+                    </div>
+                </div>
+				<div class="form-group">
                     <label class="col-lg-4 control-label">{{Adresse MAC wifi}}</label>
                     <div class="col-lg-4">
                         <span class="label label-info macWifi" style="font-size:1em;cursor:default;"></span>
@@ -140,6 +227,24 @@ $eqLogics = eqLogic::byType('wifip');
                     <label class="col-lg-4 control-label">{{Adresse Ip wifi}}</label>
                     <div class="col-lg-4">
                         <span class="label label-info ipWifi" style="font-size:1em;cursor:default;"></span>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label class="col-lg-4 control-label">{{Masque wifi}}</label>
+                    <div class="col-lg-4">
+                        <span class="label label-info maskWifi" style="font-size:1em;cursor:default;"></span>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label class="col-lg-4 control-label">{{Adresse Ip Tether}}</label>
+                    <div class="col-lg-4">
+                        <span class="label label-info iptether" style="font-size:1em;cursor:default;"></span>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label class="col-lg-4 control-label">{{Masque Tether}}</label>
+                    <div class="col-lg-4">
+                        <span class="label label-info masktether" style="font-size:1em;cursor:default;"></span>
                     </div>
                 </div>
 </fieldset>
