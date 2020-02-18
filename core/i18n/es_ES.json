@@ -1,16 +1,16 @@
 {
-    "plugins\/wifip\/core\/class\/wifip.class.php": {
-        "Connecter Wifi": "Conectar Wifi",
-        "Déconnecter Wifi": "Desconectar Wifi",
-        "Etat Wifi": "Estado Wifi",
-        "Etat Lan": "Estado Lan",
-        "Signal": "Señal",
-        "Rafraichir": "Actualizar",
-        "Lan IP": "Lan IP",
-        "Wifi IP": "Wifi IP",
-        "SSID": "SSID"
+    "desktop\/modal\/health.php": {
+        "Module": "módulo",
+        "ID": "identificación",
+        "Wifi": "WiFi"
     },
-    "plugins\/wifip\/desktop\/php\/wifip.php": {
+    "desktop\/js\/wifip.js": {
+        "Santé Wifip": "Salud Wifip",
+        "Historiser": "Historizar",
+        "Tester": "Probar"
+    },
+    "desktop\/php\/wifip.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
         "Rechercher": "Buscar",
         "Gestion": "Administración",
         "Santé": "Salud",
@@ -25,36 +25,25 @@
         "Objet parent": "Objeto padre",
         "Aucun": "Ninguno",
         "Activer": "Activar",
-        "Visible": "Visible",
+        "Visible": "visible",
         "Wifi": "WiFi",
         "Activer le wifi": "Activar el WiFi",
         "Réseau wifi": "Redes WiFi",
         "Clef": "Clave",
-        "Ip Fixe Wifi": "Ip fija Wifi",
-        "Attention le réglage d'une ip fixe peut rendre votre box invisible du réseau. Vérifiez bien les infos renseignées !! ": "¡Atención la configuración de una ip fija puede hacer que su sistema sea invisible desde la red. Revise la información cuidadosamente! ",
-        "IP fixe": "IP fija",
-        "Netmask": "Netmask",
-        "Gateway": "Gateway",
-        "Tethering": "Tethering",
-        "Activer Tether": "Activar Tether",
-        "Attention en activant le tether vous ne serez plus connecté au wifi. La box sera accessible en vous connectant au HotpointJeedom avec la clé et en vous rendant à l'adresse tether indiqué à droite! ": "¡Ten cuidado al activar el tether, no estarás conectado al wifi. El sistema será accesible conectándose al HotpointJeedom con la clave y yendo a la dirección ip de tether indicado a la derecha! ",
-        "Clé (8 caractères minimum)": "Clave (8 caracteres mínimo)",
-        "Ethernet": "Ethernet",
-        "Activer ip fixe": "Activar ip fija",
         "Informations": "Informaciones",
         "Adresse MAC ethernet": "Dirección MAC ethernet",
         "Adresse Ip ethernet": "Dirección Ip ethernet",
-        "Masque ethernet": "Máscara ethernet",
         "Adresse MAC wifi": "dirección MAC wifi",
         "Adresse Ip wifi": "Dirección Ip wifi",
-        "Masque wifi": "Máscara wifi",
-        "Adresse Ip Tether": "Dirección Ip Tether",
-        "Masque Tether": "Máscara Tether",
         "Nom": "Nombre",
         "Options": "Opciones",
         "Action": "Acción"
     },
-    "plugins\/wifip\/desktop\/js\/wifip.js": {
+    "core\/ajax\/wifip.ajax.php": {
+        "401 - Accès non autorisé": "401 - Acceso no autorizado",
+        "Aucune methode correspondante à : ": "Ningún método correspondiente a:"
+    },
+    "core\/class\/wifip.class.php": {
         "Santé Wifip": "Salud Wifip",
         "Historiser": "Historizar",
         "Tester": "Probar"

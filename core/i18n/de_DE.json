@@ -1,20 +1,20 @@
 {
-    "plugins\/wifip\/core\/class\/wifip.class.php": {
-        "Connecter Wifi": "Connecter Wifi",
-        "Déconnecter Wifi": "Déconnecter Wifi",
-        "Etat Wifi": "Etat Wifi",
-        "Etat Lan": "Etat Lan",
-        "Signal": "Signal",
-        "Rafraichir": "Aktualisieren",
-        "Lan IP": "Lan IP",
-        "Wifi IP": "Wifi IP",
-        "SSID": "SSID"
+    "desktop\/modal\/health.php": {
+        "Module": "Modul",
+        "ID": "Identifikation",
+        "Wifi": "Wifi"
     },
-    "plugins\/wifip\/desktop\/php\/wifip.php": {
+    "desktop\/js\/wifip.js": {
+        "Santé Wifip": "Wifip Gesundheit",
+        "Historiser": "Chronik",
+        "Tester": "Test"
+    },
+    "desktop\/php\/wifip.php": {
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Rechercher": "Suchen nach",
         "Gestion": "Verwaltung",
         "Santé": "Gesundheit",
-        "Mon Wifip": "Mon Wifip",
+        "Mon Wifip": "Mein Wifip",
         "Sauvegarder": "Speichern",
         "Supprimer": "Löschen",
         "Configuration avancée": "Erweiterte Konfiguration",
@@ -30,31 +30,20 @@
         "Activer le wifi": "Wifi aktivieren",
         "Réseau wifi": "Wifi Netzwerk",
         "Clef": "Schlüssel ",
-        "Ip Fixe Wifi": "Ip Fixe Wifi",
-        "Attention le réglage d'une ip fixe peut rendre votre box invisible du réseau. Vérifiez bien les infos renseignées !! ": "Attention le réglage d'une ip fixe peut rendre votre box invisible du réseau. Vérifiez bien les infos renseignées !! ",
-        "IP fixe": "feste IP",
-        "Netmask": "Netzmaske",
-        "Gateway": "Gateway",
-        "Tethering": "Tethering",
-        "Activer Tether": "Activer Tether",
-        "Attention en activant le tether vous ne serez plus connecté au wifi. La box sera accessible en vous connectant au HotpointJeedom avec la clé et en vous rendant à l'adresse tether indiqué à droite! ": "Attention en activant le tether vous ne serez plus connecté au wifi. La box sera accessible en vous connectant au HotpointJeedom avec la clé et en vous rendant à l'adresse tether indiqué à droite! ",
-        "Clé (8 caractères minimum)": "Clé (8 caractères minimum)",
-        "Ethernet": "Ethernet",
-        "Activer ip fixe": "Activer ip fixe",
         "Informations": "Information ",
-        "Adresse MAC ethernet": "Adresse MAC ethernet",
-        "Adresse Ip ethernet": "Adresse Ip ethernet",
-        "Masque ethernet": "Masque ethernet",
-        "Adresse MAC wifi": "Adresse MAC wifi",
-        "Adresse Ip wifi": "Adresse Ip wifi",
-        "Masque wifi": "Masque wifi",
-        "Adresse Ip Tether": "Adresse Ip Tether",
-        "Masque Tether": "Masque Tether",
+        "Adresse MAC ethernet": "Ethernet-MAC-Adresse",
+        "Adresse Ip ethernet": "Ethernet IP-Adresse",
+        "Adresse MAC wifi": "MAC-Adresse WiFi",
+        "Adresse Ip wifi": "Wifi IP-Adresse",
         "Nom": "Name",
         "Options": "Optionen",
         "Action": "Aktion"
     },
-    "plugins\/wifip\/desktop\/js\/wifip.js": {
+    "core\/ajax\/wifip.ajax.php": {
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "Aucune methode correspondante à : ": "Keine Methode entsprechend:"
+    },
+    "core\/class\/wifip.class.php": {
         "Santé Wifip": "Wifip Gesundheit",
         "Historiser": "Chronik",
         "Tester": "Test"
