@@ -2,7 +2,7 @@
 Este complemento se usa para administrar su red wifi.
 
 ## Activación y presentación del complemento Wifip
-### La activación
+### Activation
 Después de instalar su complemento, debe activarlo.
 
 ![wifip](/images/activation.png)

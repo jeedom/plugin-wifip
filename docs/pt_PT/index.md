@@ -2,7 +2,7 @@
 Este plugin é usado para gerenciar sua rede wifi.
 
 ## Ativação e apresentação do plugin Wifip
-### Ativação
+### Activation
 Depois de instalar seu plugin, você deve ativá-lo.
 
 ![wifip](/images/activation.png)
