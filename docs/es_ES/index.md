@@ -7,9 +7,9 @@ Después de instalar su complemento, debe activarlo.
 
 ![wifip](/images/activation.png)
 
-Después de activar el complemento, debería verlo en  **Plugins** → **Communication** → **Wifip**. Si este no es el caso, no dude en actualizar su página (Ctrl + F5 o Cmd + R).
+Después de activar el complemento, debería verlo en  **Plugins** → **Comunicación** → **Wifip**. Si este no es el caso, no dude en actualizar su página (Ctrl + F5 o Cmd + R).
 
-### Presentación 
+### Presentación
 
 Wifip se compone de una vista principal y una vista de sus objetos
 

@@ -7,7 +7,7 @@ Nach der Installation Ihres Plugins müssen Sie es aktivieren.
 
 ![wifip](/images/activation.png)
 
-Nachdem Sie das Plugin aktiviert haben, sollten Sie es in sehen  **Plugins** → **Communication** → **Wifip**. Wenn dies nicht der Fall ist, zögern Sie nicht, Ihre Seite zu aktualisieren (Strg + F5 oder Cmd + R)..
+Nachdem Sie das Plugin aktiviert haben, sollten Sie es in sehen  **Plugins** → **Kommunikation** → **Wifip**. Wenn dies nicht der Fall ist, zögern Sie nicht, Ihre Seite zu aktualisieren (Strg + F5 oder Cmd + R).
 
 ### Präsentation
 
