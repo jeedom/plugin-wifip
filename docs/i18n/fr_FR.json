@@ -1,0 +1,38 @@
+{
+    "changelog.md": {
+        "Changelog Wifip": "Changelog Wifip",
+        "14\/09\/2018": "14\/09\/2018",
+        "Suppression de la doc qui ne correpond pas au plugin": "Suppression de la doc qui ne correpond pas au plugin"
+    },
+    "index.md": {
+        "Wifip": "Wifip",
+        "Ce plugin est utilisé pour une gestion de votre réseau wifi": "Ce plugin est utilisé pour une gestion de votre réseau wifi",
+        "Activation et présentation du plugin Wifip": "Activation et présentation du plugin Wifip",
+        "Activation": "Activation",
+        "Après instalation de votre plugin, vous devez l'activer": "Après instalation de votre plugin, vous devez l'activer",
+        "Plugins": "Plugins",
+        "Communication": "Communication",
+        "Après avoir activé le plugin vous devriez le voir dans": "Après avoir activé le plugin vous devriez le voir dans",
+        "→": "→",
+        "Si ce n'est pas le cas n'hésitez pas à actualiser votre page (Ctrl+F5 ou Cmd+R": "Si ce n'est pas le cas n'hésitez pas à actualiser votre page (Ctrl+F5 ou Cmd+R",
+        "Présentation": "Présentation",
+        "Wifip est composé d'une vue principale et une vue sur vos objets": "Wifip est composé d'une vue principale et une vue sur vos objets",
+        "Vous avez également la possibilité de consulter la santé de votre wifi": "Vous avez également la possibilité de consulter la santé de votre wifi",
+        "Votre équipement Wifip": "Votre équipement Wifip",
+        "Dans la vue globale": "Dans la vue globale",
+        "Partie général": "Partie général",
+        "Nom de votre équipement": "Nom de votre équipement",
+        "Parent de votre équipement": "Parent de votre équipement",
+        "Partie Wifi": "Partie Wifi",
+        "Case activer wifi": "Case activer wifi",
+        "Différents réseaux wifi sélectionnables": "Différents réseaux wifi sélectionnables",
+        "Clé réseaux": "Clé réseaux",
+        "Partie Informations": "Partie Informations",
+        "Adresse MAC ethernet": "Adresse MAC ethernet",
+        "Adresse Ip ethernet": "Adresse Ip ethernet",
+        "Adresse MAC wifi": "Adresse MAC wifi",
+        "Adresse Ip wifi": "Adresse Ip wifi",
+        "Dans la vue commandes différentes commandes sont actives, pour chaque commandes les options suivantes sont disponibles": "Dans la vue commandes différentes commandes sont actives, pour chaque commandes les options suivantes sont disponibles",
+        "renommer, supprimer, historiser, configurer ou tester": "renommer, supprimer, historiser, configurer ou tester"
+    }
+}
