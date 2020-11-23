@@ -1,13 +1,13 @@
 # Wifip
-Ce plugin est utilisé pour une gestion de votre réseau wifi.
+Ce plugin est utilisé pour la gestion de votre réseau wifi.
 
 ## Activation et présentation du plugin Wifip
 ### Activation
-Après instalation de votre plugin, vous devez l'activer.
+Après installation du plugin, vous devez l'activer.
 
 ![wifip](/images/activation.png)
 
-Après avoir activé le plugin vous devriez le voir dans  **Plugins** → **Communication** → **Wifip**. Si ce n'est pas le cas n'hésitez pas à actualiser votre page (Ctrl+F5 ou Cmd+R).
+Après avoir activé le plugin vous devriez le voir dans  **Plugins** → **Communication** → **Wifip**. Si ce n'est pas le cas, n'hésitez pas à actualiser votre page (``Ctrl+F5`` ou ``Cmd+R``).
 
 ### Présentation
 
