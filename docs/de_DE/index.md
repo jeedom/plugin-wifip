@@ -3,11 +3,11 @@ Dieses Plugin wird zur Verwaltung Ihres WLAN-Netzwerks verwendet.
 
 ## Aktivierung und Präsentation des Wifip-Plugins
 ### Activation
-Nach der Installation Ihres Plugins müssen Sie es aktivieren.
+Nach der Installation des Plugins müssen Sie es aktivieren.
 
 ![wifip](/images/activation.png)
 
-Nachdem Sie das Plugin aktiviert haben, sollten Sie es in sehen  **Plugins** → **Kommunikation** → **Wifip**. Wenn dies nicht der Fall ist, zögern Sie nicht, Ihre Seite zu aktualisieren (Strg + F5 oder Cmd + R).
+Nachdem Sie das Plugin aktiviert haben, sollten Sie es in sehen  **Plugins** → **Kommunikation** → **Wifip**. Wenn nicht, können Sie Ihre Seite jederzeit aktualisieren (``Ctrl+F5`` oder ``Cmd+R``).
 
 ### Präsentation
 

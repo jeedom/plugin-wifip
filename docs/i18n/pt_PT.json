@@ -1,16 +1,21 @@
 {
     "changelog.md": {
         "Changelog Wifip": "Changelog Wifip",
+        "23\/11\/2020": "23\/11\/2020",
+        "Mise à jour de l'interface": "Atualização da interface",
+        "Mise à jour de l'icône du plugin": "Ícone de atualização do plugin",
+        "Nouvelle présentation de la liste des objets": "Nova apresentação da lista de objetos",
+        "Ajout du tag \"Compatibilité V4": "Adição da tag \"compatibilidade V4",
         "14\/09\/2018": "14\/09\/2018",
-        "Suppression de la doc qui ne correpond pas au plugin": "Exclusão do documento que não corresponde ao plugin"
+        "Suppression de la doc qui ne correspond pas au plugin": "Remoção do documento que não corresponde ao plugin"
     },
     "index.md": {
-        "Ce plugin est utilisé pour une gestion de votre réseau wifi": "Este plugin é usado para gerenciar sua rede wifi",
+        "Ce plugin est utilisé pour la gestion de votre réseau wifi": "Este plugin é usado para gerenciar sua rede wi-fi",
         "Activation et présentation du plugin Wifip": "Ativação e apresentação do plugin Wifip",
-        "Après instalation de votre plugin, vous devez l'activer": "Depois de instalar seu plugin, você deve ativá-lo",
+        "Après installation du plugin, vous devez l'activer": "Depois de instalar o plugin, você deve ativá-lo",
         "Après avoir activé le plugin vous devriez le voir dans": "Depois de ativar o plugin, você deverá vê-lo em",
         "→": "→",
-        "Si ce n'est pas le cas n'hésitez pas à actualiser votre page (Ctrl+F5 ou Cmd+R": "Se não for esse o caso, não hesite em atualizar sua página (Ctrl + F5 ou Cmd + R",
+        "Si ce n'est pas le cas, n'hésitez pas à actualiser votre page": "Se não, sinta-se à vontade para atualizar sua página",
         "Présentation": "1. Introdução",
         "Wifip est composé d'une vue principale et une vue sur vos objets": "O Wifip é composto por uma visão principal e uma visão dos seus objetos",
         "Vous avez également la possibilité de consulter la santé de votre wifi": "Você também pode verificar a saúde do seu wifi",
@@ -57,6 +62,13 @@
         " Communication]": " Comunicação]",
         "[Communication]": "[Comunicação]",
         "*Communication*": "*Comunicação*",
-        " Communication*": " Comunicação*"
+        " Communication*": " Comunicação*",
+        " ou.": " onde.",
+        " ou?": " onde?",
+        "ou ": "onde ",
+        " ou]": " onde]",
+        "[ou]": "[onde]",
+        "*ou*": "*onde*",
+        " ou*": " onde*"
     }
 }

@@ -1,16 +1,21 @@
 {
     "changelog.md": {
         "Changelog Wifip": "Changelog Wifip",
+        "23\/11\/2020": "23\/11\/2020",
+        "Mise à jour de l'interface": "Schnittstellenaktualisierung",
+        "Mise à jour de l'icône du plugin": "Plugin-Symbol aktualisieren",
+        "Nouvelle présentation de la liste des objets": "Neue Darstellung der Objektliste",
+        "Ajout du tag \"Compatibilité V4": "Hinzufügung des Tags \"V4-Kompatibilität",
         "14\/09\/2018": "14.09.2008",
-        "Suppression de la doc qui ne correpond pas au plugin": "Löschen des Dokuments, das nicht dem Plugin entspricht"
+        "Suppression de la doc qui ne correspond pas au plugin": "Entfernen des Dokuments, das nicht mit dem Plugin übereinstimmt"
     },
     "index.md": {
-        "Ce plugin est utilisé pour une gestion de votre réseau wifi": "Dieses Plugin wird zur Verwaltung Ihres WLAN-Netzwerks verwendet",
+        "Ce plugin est utilisé pour la gestion de votre réseau wifi": "Dieses Plugin wird zur Verwaltung Ihres WLAN-Netzwerks verwendet",
         "Activation et présentation du plugin Wifip": "Aktivierung und Präsentation des Wifip-Plugins",
-        "Après instalation de votre plugin, vous devez l'activer": "Nach der Installation Ihres Plugins müssen Sie es aktivieren",
+        "Après installation du plugin, vous devez l'activer": "Nach der Installation des Plugins müssen Sie es aktivieren",
         "Après avoir activé le plugin vous devriez le voir dans": "Nachdem Sie das Plugin aktiviert haben, sollten Sie es in sehen",
         "→": "→",
-        "Si ce n'est pas le cas n'hésitez pas à actualiser votre page (Ctrl+F5 ou Cmd+R": "Wenn dies nicht der Fall ist, zögern Sie nicht, Ihre Seite zu aktualisieren (Strg + F5 oder Cmd + R",
+        "Si ce n'est pas le cas, n'hésitez pas à actualiser votre page": "Wenn nicht, können Sie Ihre Seite jederzeit aktualisieren",
         "Présentation": "Präsentation",
         "Wifip est composé d'une vue principale et une vue sur vos objets": "Wifip besteht aus einer Hauptansicht und einer Ansicht Ihrer Objekte",
         "Vous avez également la possibilité de consulter la santé de votre wifi": "Sie können auch die Gesundheit Ihres WLANs überprüfen",
@@ -57,6 +62,13 @@
         " Communication]": " Kommunikation]",
         "[Communication]": "[Kommunikation]",
         "*Communication*": "*Kommunikation*",
-        " Communication*": " Kommunikation*"
+        " Communication*": " Kommunikation*",
+        " ou.": " oder.",
+        " ou?": " oder?",
+        "ou ": "oder ",
+        " ou]": " oder]",
+        "[ou]": "[oder]",
+        "*ou*": "*oder*",
+        " ou*": " oder*"
     }
 }

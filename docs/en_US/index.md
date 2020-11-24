@@ -3,11 +3,11 @@ This plugin is used for managing your wifi network.
 
 ## Wifip plugin activation and presentation
 ### Activation
-After installing your plugin, you must activate it.
+After installing the plugin, you must activate it.
 
 ![wifip](/images/activation.png)
 
-After activating the plugin you should see it in  **Plugins** → **Communication** → **Wifip**. If this is not the case do not hesitate to update your page (Ctrl + F5 or Cmd + R).
+After activating the plugin you should see it in  **Plugins** → **Communication** → **Wifip**. If not, feel free to refresh your page (``Ctrl+F5`` or ``Cmd+R``).
 
 ### Presentation
 
