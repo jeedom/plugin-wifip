@@ -85,10 +85,24 @@ class wifip extends eqLogic {
 	public static function isWificonnected ($ssid) {
 		$result = shell_exec("sudo nmcli d | grep '" . $ssid . "'");
 		log::add('wifip','debug',$result);
-		if (strpos($result,' connected ') === false){
+		if (strpos($result,'connected') === false && strpos($result,'connectÃ©') === false){
 			return false;
 		}
 		return true;
+	}
+  
+  	public static function isWifiProfileexist($ssid) {
+		$result = shell_exec("nmcli --fields NAME con show");
+		$countProfile = substr_count($result, $ssid);
+      	if ($countProfile > 1){
+        	log::add('wifip','debug','suppression des profils');
+        	//shell_exec("nmcli --pretty --fields UUID,TYPE con show | grep wifi | awk '{print $1}' | while read line; do nmcli con delete uuid  $line; done");
+        	return true;
+        }else if ($countProfile == 1){
+        	return true;
+        }else{
+        	return false;
+        }
 	}
 	
 	public static function listWifi($forced = false) {
@@ -134,12 +148,16 @@ class wifip extends eqLogic {
 			if (self::isWificonnected($ssid) === false) {
 				log::add('wifip','debug','Not Connected to ' . $ssid . '. Connecting ...');
 				shell_exec("sudo ip link set wlan0");
-				$password = $this->getConfiguration('wifiPassword','');
-				if ($password != ''){
-					$exec = "sudo nmcli dev wifi connect '" . $ssid . "' password '" . $password . "'";
-				} else {
-				$exec ="sudo nmcli dev wifi connect '" . $ssid . "'";
-				}
+              	if(self::isWifiProfileexist($ssid) === true) {
+                	$exec = "sudo nmcli con up '".$ssid."'";
+                }else{
+                	$password = $this->getConfiguration('wifiPassword','');
+                    if ($password != ''){
+                        $exec = "sudo nmcli dev wifi connect '" . $ssid . "' password '" . $password . "'";
+                    } else {
+                    $exec ="sudo nmcli dev wifi connect '" . $ssid . "'";
+                    }
+                }
 				log::add('wifip','debug','Executing ' . $exec);
 				shell_exec($exec);
 			}
@@ -167,7 +185,7 @@ class wifip extends eqLogic {
 			$disconnect = new wifipCmd();
 			$disconnect->setLogicalId('disconnect');
 			$disconnect->setIsVisible(1);
-			$disconnect->setName(__('Déconnecter Wifi', __FILE__));
+			$disconnect->setName(__('D?connecter Wifi', __FILE__));
 		}
 		$disconnect->setType('action');
 		$disconnect->setSubType('other');
