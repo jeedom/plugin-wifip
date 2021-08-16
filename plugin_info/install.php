@@ -51,7 +51,7 @@ function wifip_update() {
 		$wifip->save();
     }
 	//shell_exec('sudo find /etc/NetworkManager/system-connections/ -name "Orange*" -exec  sudo rm {} \;');
-	shell_exec("nmcli --pretty --fields UUID,TYPE con show | grep wifi | awk '{print $1}' | while read line; do nmcli con delete uuid  $line; done");
+	//shell_exec("nmcli --pretty --fields UUID,TYPE con show | grep wifi | awk '{print $1}' | while read line; do nmcli con delete uuid  $line; done");
 	shell_exec("sudo rm -f /var/log/daemon.log*");	
 }
 
