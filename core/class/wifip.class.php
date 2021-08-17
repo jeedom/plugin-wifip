@@ -288,6 +288,19 @@ class wifipCmd extends cmd {
 				$eqLogic->setConfiguration('wifiEnabled', false);
 				$eqLogic->save();
 				break;
+			 case 'repair':
+				$ssidConf = $eqLogic->getConfiguration('wifiSsid');
+            			if($ssidConf == ""){
+					$eqLogic->setConfiguration('wifiSsid', shell_exec('iwgetid -r'));
+					$eqLogic->save();
+					message::add('wifip', 'sauvegarde ssid');
+				}
+				$connFile = shell_exec('nmcli --fields TYPE,FILENAME con show --active | grep -i wifi | cut -c46-600');
+				message::add('wifip', 'suppression des profils pour'.$connFile);
+				shell_exec('sudo find /etc/NetworkManager/system-connections -type f ! -name "'.$connFile.'" -delete');
+				shell_exec("sudo rm -f /var/log/daemon.log*");
+				message::add('wifip', 'suppression OK merci de redémarrer');
+				break;
 		}
 		$eqLogic->cron5($eqLogic->getId());
 	}
