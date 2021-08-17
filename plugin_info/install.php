@@ -19,6 +19,7 @@
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 function wifip_install() {
+	message::add('wifip','installation du device');
 	$eqLogic = wifip::byLogicalId('wifip', 'wifip');
 	if (!is_object($eqLogic)) {
 		$eqLogic = new wifip();
@@ -30,12 +31,22 @@ function wifip_install() {
 		$eqLogic->setIsEnable(1);
 		$eqLogic->save();
 	}
+	if(!is_object(cmd::byEqLogicIdAndLogicalId($eqLogic->getId(),'repair')){
+      		$cmd = new wifipCmd();
+      		$cmd->setEqLogic_id($eqLogic->getId());
+      		$cmd->setLogicalId('repair');
+      		$cmd->setType('action');
+      		$cmd->setSubType('other');
+      		$cmd->setName('repair');
+      		$cmd->save();
+    	}
     foreach (eqLogic::byType('wifip') as $wifip) {
         $wifip->save();
     }
 }
 
 function wifip_update() {
+	message::add('wifip','mise a jour du device');
 	$eqLogic = wifip::byLogicalId('wifip', 'wifip');
 	if (!is_object($eqLogic)) {
 		$eqLogic = new wifip();
