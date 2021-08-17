@@ -31,7 +31,7 @@ function wifip_install() {
 		$eqLogic->setIsEnable(1);
 		$eqLogic->save();
 	}
-	if(!is_object(cmd::byEqLogicIdAndLogicalId($eqLogic->getId(),'repair')){
+	if(!is_object(cmd::byEqLogicIdAndLogicalId($eqLogic->getId(),'repair'))){
       		$cmd = new wifipCmd();
       		$cmd->setEqLogic_id($eqLogic->getId());
       		$cmd->setLogicalId('repair');
@@ -58,7 +58,7 @@ function wifip_update() {
 		$eqLogic->setIsEnable(1);
 		$eqLogic->save();
 	}
-	if(!is_object(cmd::byEqLogicIdAndLogicalId($eqLogic->getId(),'repair')){
+	if(!is_object(cmd::byEqLogicIdAndLogicalId($eqLogic->getId(),'repair'))){
       		$cmd = new wifipCmd();
       		$cmd->setEqLogic_id($eqLogic->getId());
       		$cmd->setLogicalId('repair');
