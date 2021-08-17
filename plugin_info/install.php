@@ -47,12 +47,18 @@ function wifip_update() {
 		$eqLogic->setIsEnable(1);
 		$eqLogic->save();
 	}
-    foreach (eqLogic::byType('wifip') as $wifip) {
+	if(!is_object(cmd::byEqLogicIdAndLogicalId($eqLogic->getId(),'repair')){
+      		$cmd = new wifipCmd();
+      		$cmd->setEqLogic_id($eqLogic->getId());
+      		$cmd->setLogicalId('repair');
+      		$cmd->setType('action');
+      		$cmd->setSubType('other');
+      		$cmd->setName('repair');
+      		$cmd->save();
+    	}
+    	foreach (eqLogic::byType('wifip') as $wifip) {
 		$wifip->save();
-    }
-	//shell_exec('sudo find /etc/NetworkManager/system-connections/ -name "Orange*" -exec  sudo rm {} \;');
-	//shell_exec("nmcli --pretty --fields UUID,TYPE con show | grep wifi | awk '{print $1}' | while read line; do nmcli con delete uuid  $line; done");
-	shell_exec("sudo rm -f /var/log/daemon.log*");	
+    	}
 }
 
 ?>
