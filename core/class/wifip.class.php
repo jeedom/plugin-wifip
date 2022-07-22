@@ -85,10 +85,13 @@ class wifip extends eqLogic {
 	public static function isWificonnected ($ssid) {
 		$result = shell_exec("sudo nmcli d | grep '" . $ssid . "'");
 		log::add('wifip','debug',$result);
-		if (strpos($result,'connected') === false && strpos($result,'connecté') === false){
-			return false;
+		if (strpos($result,'connected') === true){
+			return true;
 		}
-		return true;
+		if(strpos($result,'connecté') === true){
+			return true;
+		}
+		return false;
 	}
   
   	public static function isWifiProfileexist($ssid) {
