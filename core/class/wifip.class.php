@@ -159,6 +159,7 @@ class wifip extends eqLogic {
                     }
                 }
 				log::add('wifip','debug','Executing ' . $exec);
+				shell_exec("sudo nmcli connection modify '".$ssid."' ipv4.route-metric 50");
 				shell_exec($exec);
 			}
 		} else {
