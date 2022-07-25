@@ -83,14 +83,21 @@ class wifip extends eqLogic {
 	}
 	
 	public static function isWificonnected ($ssid) {
+      	log::add('wifip','debug',"test connexion du ssid >> '".$result."'");
 		$result = shell_exec("sudo nmcli d | grep '" . $ssid . "'");
-		log::add('wifip','debug',$result);
-		if (strpos($result,'connected') === true){
+		log::add('wifip','debug','VERIFICATION >> '.$result);
+		if (strpos($result,'connected') != false){
+          log::add('wifip','debug','connected >> OK');
 			return true;
 		}
-		if(strpos($result,'connecté') === true){
+		if(strpos($result,'connecté') != false){
+          log::add('wifip','debug','connecté >> OK');
 			return true;
 		}
+      	if(strpos($result,'connecting') != false){
+          log::add('wifip','debug','connecting >> OK');
+         	return true; 
+        }
 		return false;
 	}
   
@@ -147,24 +154,29 @@ class wifip extends eqLogic {
 	
 	public function wifiConnect() {
 		if ($this->getConfiguration('wifiEnabled') == true){
-			$ssid = $this->getConfiguration('wifiSsid','');
+			$ssid = $this->getConfiguration('wifiSsid',null);
+          	if($ssid == null){
+             	log::add('wifip','debug','ssid vide');
+             return; 
+            }
+          	log::add('wifip','debug','test de la connexion au ssid > '.$ssid);
 			if (self::isWificonnected($ssid) === false) {
 				log::add('wifip','debug','Not Connected to ' . $ssid . '. Connecting ...');
 				shell_exec("sudo ip link set wlan0");
               	if(self::isWifiProfileexist($ssid) === true) {
+                  	shell_exec("sudo nmcli connection modify '".$ssid."' ipv4.route-metric 50");
                 	$exec = "sudo nmcli con up '".$ssid."'";
                 }else{
                 	$password = $this->getConfiguration('wifiPassword','');
                     if ($password != ''){
-                        $exec = "sudo nmcli dev wifi connect '" . $ssid . "' password '" . $password . "'";
+                        $exec = "sudo nmcli dev wifi connect '" . $ssid . "' password '" . $password . "' ipv4.route-metric 50";
                     } else {
                     $exec ="sudo nmcli dev wifi connect '" . $ssid . "'";
                     }
                 }
 				log::add('wifip','debug','Executing ' . $exec);
 				shell_exec($exec);
-				shell_exec("sudo nmcli connection modify '".$ssid."' ipv4.route-metric 50");
-				shell_exec("sudo nmcli connection up '".$ssid."'");
+              	
 			}
 		} else {
 			log::add('wifip','debug','Executing sudo nmcli dev disconnect wlan0');
