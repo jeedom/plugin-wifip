@@ -171,7 +171,7 @@ class wifip extends eqLogic {
                     if ($password != ''){
                         $exec = "sudo nmcli dev wifi connect '" . $ssid . "' password '" . $password . "' ipv4.route-metric 50";
                     } else {
-                    $exec ="sudo nmcli dev wifi connect '" . $ssid . "'";
+                    $exec ="sudo nmcli dev wifi connect '" . $ssid . "' ipv4.route-metric 50";
                     }
                 }
 				log::add('wifip','debug','Executing ' . $exec);
